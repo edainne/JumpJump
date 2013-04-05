@@ -53,10 +53,10 @@
     scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", playerPoints] fontName:@"Marker Felt" fontSize:10.0];
     scoreLabel.position = ccp(self.contentSize.width/2, self.contentSize.height-20);
     [scoreLabel setColor:ccc3(255, 255, 255)];
-    [self addChild:scoreLabel z:1000];
+    [self addChild:scoreLabel z:1000 tag:scoreTag];
 
     
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 70.0)];
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
 	return self;
 }
 
@@ -167,7 +167,9 @@
 
 -(void) step: (ccTime) dt
 {
-
+    playerPoints+=1;
+    [self updateScore:playerPoints];
+    
     CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
     player = (CCSprite *) [self getChildByTag:playerTag];
     
@@ -199,7 +201,7 @@
             maximumX = platformPosition.x - platformSize.width/2 - 10;
             minimumX = platformPosition.x + platformSize.width/2 + 10;
             
-            float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2);
+            float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2 - kPlatformTopPadding);
             
             if (playerPosition.x > maximumX &&
                 playerPosition.x < minimumX &&
@@ -218,6 +220,7 @@
         currentPlatformY -= delta;
     
     t = t = platformsStartTag;
+        
     for(t; t < platformsStartTag + kNumPlatforms; t++) {
         CCSprite *platform = (CCSprite *)[self getChildByTag:t];
         CGPoint pos = platform.position;
@@ -235,55 +238,36 @@
     
     [self updatePlayerPosition:playerPosition];
 
-    if (player.boundingBox.origin.y > self.boundingBox.size.height) {
-        NSLog(@"Death");
-
-    }
 }
 
 -(void) updatePlayerPosition : (CGPoint) pPosition
 {
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
     playerPosition = pPosition;
-    NSLog(@"%f, %f", playerPosition.x, playerPosition.y);
-    if (playerPosition.y < 0) {
-        NSLog(@"Death");
-    
+    if (playerPosition.y + player.boundingBox.size.height/2 + 10 < 0) {
+    NSLog(@"Death");
+    [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPoints]];
+    [self unschedule:@selector(step:)];
     }
+    
 }
 
--(void) updateScore : (NSInteger) newScore
+-(int) updateScore : (NSInteger) newScore
 {
 
     playerPoints = newScore;
-//    int playerPointsFinal;
     [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPoints]];
-//    if (playerPosition.y < 0) {
-//        playerPointsFinal = playerPoints;
-//        [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPointsFinal]];
-//    }
-   
+    return playerPoints;
 }
 
-//-(void) addScore
-//{
-//    int x;
-//    NSLog(@" x = %d", x);
-//    for (x=0; x<=10; x++) {
-//        if (x==10) {
-//            playerPoints+=1;
-//            NSLog(@"PLAYER POINTS: %d", playerPoints);
-//            [self updateScore:playerPoints];
-//        }
-//        NSLog(@"x = %d",x);
-//    }
-//}
 - (void) playerJump
 {
     NSLog(@"jump");
 	playerVelocity.y = 350.0f + fabsf(playerVelocity.x);
-    playerPoints+=5;
+    playerPoints+=1;
     NSLog(@"PLAYER POINTS: %d", playerPoints);
     [self updateScore:playerPoints];
+
 
 }
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
@@ -291,6 +275,4 @@
 	float accel_filter = 0.1f;
 	playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
 }
-
-
 @end

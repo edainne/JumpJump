@@ -35,10 +35,11 @@
     int scoreTag;
     
     int playerPoints;
+    int playerPointsFinal;
 
     UIAccelerometer *accelerometer;
 }
-@property (retain, nonatomic) CCLabelTTF* scoreLabel;;
+@property (retain, nonatomic) CCLabelTTF* scoreLabel;
 
 - (void)createPlatforms;
 - (void)initializePlatform;
@@ -49,7 +50,7 @@
 - (void)resetPlayer;
 - (void)step:(ccTime)dt;
 - (void)playerJump;
--(void) updateScore : (NSInteger) newScore;
+- (int) updateScore : (NSInteger) newScore;
 +(CCScene *) scene;
 
 @end
