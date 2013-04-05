@@ -61,6 +61,8 @@
 {
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+
 	
 	
 	// CCGLView creation
@@ -83,7 +85,7 @@
 									sharegroup:nil
 								 multiSampling:NO
 							   numberOfSamples:0];
-	
+    [glView setMultipleTouchEnabled:YES];
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
 	director_.wantsFullScreenLayout = YES;

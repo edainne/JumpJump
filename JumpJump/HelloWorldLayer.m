@@ -47,7 +47,7 @@
     [self addChild:player z:10 tag: playerTag];
         [self schedule:@selector(step:)];
         _accelerometerEnabled = YES;
-        _touchEnabled = NO;
+        _touchEnabled = YES;
         [self startGame];
     
     playerPoints = 0;
@@ -64,10 +64,36 @@
 - (void) dealloc
 {
     [super dealloc];
-    
-
 }
 
+- (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    [[CCDirector sharedDirector] stopAnimation];
+    [[CCDirector sharedDirector] pause];
+    [self pauseSchedulerAndActions];
+    
+}
+//- (void)ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
+//{
+//    [[CCDirector sharedDirector] resume];
+//    [[CCDirector sharedDirector] startAnimation];
+//    [self resumeSchedulerAndActions];
+//}
+
+//- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    NSArray *touchArray=[touches allObjects];
+//    
+//    if ([touchArray count] == 2){
+//        [[CCDirector sharedDirector] stopAnimation];
+//        [[CCDirector sharedDirector] pause];
+//        [self pauseSchedulerAndActions];
+//    } else if([touchArray count]==1){
+//        [[CCDirector sharedDirector] resume];
+//        [[CCDirector sharedDirector] startAnimation];
+//        [self resumeSchedulerAndActions];
+//    }
+//}
 -(void) initializePlatform
 {
     CCSprite *platform = [CCSprite spriteWithFile:@"platform.png"];
@@ -281,4 +307,5 @@
 	float accel_filter = 0.1f;
 	playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
 }
+
 @end
