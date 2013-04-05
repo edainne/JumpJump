@@ -139,6 +139,8 @@
 		B05B72B1170955C800066A37 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B05B72B0170955C800066A37 /* AppDelegate.m */; };
 		B05B72B4170955C800066A37 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B05B72B3170955C800066A37 /* HelloWorldLayer.m */; };
 		B05B72B7170955C800066A37 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B05B72B6170955C800066A37 /* IntroLayer.m */; };
+		B05B72BE1709567C00066A37 /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = B05B72BD1709567C00066A37 /* platform.png */; };
+		B06C1448170D836700FDD397 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = B06C1447170D836700FDD397 /* GameOver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -420,6 +422,10 @@
 		B05B72B3170955C800066A37 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		B05B72B5170955C800066A37 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		B05B72B6170955C800066A37 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		B05B72BD1709567C00066A37 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
+		B06C128B170D6F6A00FDD397 /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
+		B06C1446170D836700FDD397 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		B06C1447170D836700FDD397 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,6 +488,8 @@
 				B05B72B0170955C800066A37 /* AppDelegate.m */,
 				B05B72B2170955C800066A37 /* HelloWorldLayer.h */,
 				B05B72B3170955C800066A37 /* HelloWorldLayer.m */,
+				B06C1446170D836700FDD397 /* GameOver.h */,
+				B06C1447170D836700FDD397 /* GameOver.m */,
 				B05B72B5170955C800066A37 /* IntroLayer.h */,
 				B05B72B6170955C800066A37 /* IntroLayer.m */,
 				B05B7122170955C300066A37 /* Resources */,
@@ -495,8 +503,10 @@
 			isa = PBXGroup;
 			children = (
 				B05B7123170955C300066A37 /* Default.png */,
+				B06C128B170D6F6A00FDD397 /* Arial Black.ttf */,
 				B05B7125170955C300066A37 /* Default@2x.png */,
 				B05B7127170955C300066A37 /* Default-568h@2x.png */,
+				B05B72BD1709567C00066A37 /* platform.png */,
 				B05B7129170955C300066A37 /* Default-Landscape~ipad.png */,
 				B05B712B170955C300066A37 /* Icon-72.png */,
 				B05B712D170955C300066A37 /* Icon-Small-50.png */,
@@ -933,6 +943,7 @@
 				B05B7136170955C300066A37 /* Icon@2x.png in Resources */,
 				B05B7139170955C300066A37 /* iTunesArtwork in Resources */,
 				B05B728F170955C800066A37 /* ChangeLog in Resources */,
+				B05B72BE1709567C00066A37 /* platform.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1054,6 +1065,7 @@
 				B05B72B1170955C800066A37 /* AppDelegate.m in Sources */,
 				B05B72B4170955C800066A37 /* HelloWorldLayer.m in Sources */,
 				B05B72B7170955C800066A37 /* IntroLayer.m in Sources */,
+				B06C1448170D836700FDD397 /* GameOver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,6 +1171,7 @@
 				B05B72BC170955C800066A37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

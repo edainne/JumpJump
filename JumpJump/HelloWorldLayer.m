@@ -12,12 +12,12 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-
+#import <mach/mach_time.h>
 #pragma mark - HelloWorldLayer
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
-
+@synthesize scoreLabel;
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
 {
@@ -34,100 +34,263 @@
 	return scene;
 }
 
-// on "init" you need to initialize your instance
 -(id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super's" return value
-	if( (self=[super init]) ) {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+    platformsStartTag = 200;
+	if(![super init]) return nil;
+//    [super initWithColor:ccc4(255, 255, 255, 255)];
+ 
+    [self createPlatforms];
+    CCSprite *player = [CCSprite spriteWithFile:@"Icon.png"];
 
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
-		
-		
-		
-		//
-		// Leaderboards and Achievements
-		//
-		
-		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:28];
-		
-		// to avoid a retain-cycle with the menuitem and blocks
-		__block id copy_self = self;
-		
-		// Achievement Menu Item using blocks
-		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-			
-			
-			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-			achivementViewController.achievementDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
-			
-			[achivementViewController release];
-		}];
-		
-		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-			
-			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-			[leaderboardViewController release];
-		}];
+    [self addChild:player z:10 tag: playerTag];
+        [self schedule:@selector(step:)];
+        _accelerometerEnabled = YES;
+        _touchEnabled = NO;
+        [self startGame];
+    
+    playerPoints = 0;
+    scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", playerPoints] fontName:@"Marker Felt" fontSize:10.0];
+    scoreLabel.position = ccp(self.contentSize.width/2, self.contentSize.height-20);
+    [scoreLabel setColor:ccc3(255, 255, 255)];
+    [self addChild:scoreLabel z:1000];
 
-		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
-		
-		// Add the menu to the layer
-		[self addChild:menu];
-
-	}
+    
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 70.0)];
 	return self;
 }
 
-// on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
+    [super dealloc];
+    
+
+}
+
+-(void) initializePlatform
+{
+    CCSprite *platform = [CCSprite spriteWithFile:@"platform.png"];
+    [self addChild:platform z: 3 tag:currentPlatformTag];
+}
+
+-(void) createPlatforms
+{
 	
-	// don't forget to call "super dealloc"
-	[super dealloc];
+    currentPlatformTag = platformsStartTag;
+	while (currentPlatformTag < platformsStartTag + kNumPlatforms)
+    {
+		[self initializePlatform];
+		currentPlatformTag++;
+	}
+	[self resetPlatforms];
+
 }
 
-#pragma mark GameKit delegate
-
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
+-(void) resetPlatforms
 {
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+    currentPlatformY = -1;
+	currentPlatformTag = platformsStartTag;
+	currentMaxPlatformStep = 60.0f;
+	platformCount = 0;
+    
+	while(currentPlatformTag < platformsStartTag + kNumPlatforms)
+    {
+		[self resetPlatform];
+		currentPlatformTag++;
+
+	}
+    NSLog(@"CPT %i", platformsStartTag);
 }
 
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+-(void) resetPlatform
 {
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+    if (currentPlatformY < 0)
+    {
+        currentPlatformY = 30.0f;
+    }
+    else
+    {
+        currentPlatformY += random() % (int)(currentMaxPlatformStep - kMinPlatformStep) + kMinPlatformStep;
+        
+		if(currentMaxPlatformStep < kMaxPlatformStep)
+        {
+			currentMaxPlatformStep += 0.5f;
+        }
+    }
+    
+    CCSprite *platform = [CCSprite spriteWithFile:@"platform.png"];
+    platform = (CCSprite*)[self getChildByTag:currentPlatformTag];
+
+	float x;
+	CGSize size = platform.contentSize;
+    
+	if(currentPlatformY == 30.0f)
+    {
+		x = 160.0f;
+	}
+    else
+    {
+		x = random() % (320-(int)size.width) + size.width/2;
+	}
+	
+	platform.position = ccp(x,currentPlatformY);
+	platformCount++;
+	
+
+	}
+
+- (void)startGame
+{
+    playerPoints = 0;
+	[self resetPlatforms];
+	[self resetPlayer];
+    
+    	
+	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
+
+-(void) resetPlayer
+{
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
+    player = (CCSprite *) [self getChildByTag:playerTag];
+    playerPosition.x = 160;
+    playerPosition.y = 160;
+    player.position = playerPosition;
+    
+    playerVelocity.x = 0;
+    playerVelocity.y = 0;
+    
+    playerAcc.x = 0;
+    playerAcc.y = -550.0f;
+
+}
+
+-(void) step: (ccTime) dt
+{
+
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
+    player = (CCSprite *) [self getChildByTag:playerTag];
+    
+    playerPosition.x += playerVelocity.x * dt;
+    
+    CGSize playerSize = player.contentSize;
+    float maximumX = 320 - playerSize.width/2;
+    float minimumX = 0 + playerSize.width/2;
+    
+    if (playerPosition.x - 57 > maximumX) {
+        playerPosition.x = minimumX;
+    }
+    if (playerPosition.x + 57 < minimumX) {
+        playerPosition.x = maximumX;
+    }
+    
+    playerVelocity.y += playerAcc.y * dt;
+    playerPosition.y += playerVelocity.y * dt;
+    
+    int t;
+    if (playerVelocity.y < 0) {
+        t = platformsStartTag;
+        for (t ; t < platformsStartTag + kNumPlatforms; t++) {
+            CCSprite *platform = (CCSprite*)[self getChildByTag:t];
+            
+            CGSize platformSize = platform.contentSize;
+            CGPoint platformPosition = platform.position;
+            
+            maximumX = platformPosition.x - platformSize.width/2 - 10;
+            minimumX = platformPosition.x + platformSize.width/2 + 10;
+            
+            float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2);
+            
+            if (playerPosition.x > maximumX &&
+                playerPosition.x < minimumX &&
+                playerPosition.y > platformPosition.y &&
+                playerPosition.y < minimumY) {
+                [self playerJump];
+            }
+        }
+    }
+    else if (playerPosition.y > 240){
+
+        
+        float delta = playerPosition.y - 240;
+        playerPosition.y = 240;
+        
+        currentPlatformY -= delta;
+    
+    t = t = platformsStartTag;
+    for(t; t < platformsStartTag + kNumPlatforms; t++) {
+        CCSprite *platform = (CCSprite *)[self getChildByTag:t];
+        CGPoint pos = platform.position;
+        pos = ccp(pos.x, pos.y - delta);
+        if (pos.y <-platform.contentSize.height/2) {
+            currentPlatformTag = t;
+            [self resetPlatform];
+        } else {
+            platform.position = pos;
+            }
+        }
+
+    }
+    player.position = playerPosition;
+    
+    [self updatePlayerPosition:playerPosition];
+
+    if (player.boundingBox.origin.y > self.boundingBox.size.height) {
+        NSLog(@"Death");
+
+    }
+}
+
+-(void) updatePlayerPosition : (CGPoint) pPosition
+{
+    playerPosition = pPosition;
+    NSLog(@"%f, %f", playerPosition.x, playerPosition.y);
+    if (playerPosition.y < 0) {
+        NSLog(@"Death");
+    
+    }
+}
+
+-(void) updateScore : (NSInteger) newScore
+{
+
+    playerPoints = newScore;
+//    int playerPointsFinal;
+    [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPoints]];
+//    if (playerPosition.y < 0) {
+//        playerPointsFinal = playerPoints;
+//        [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPointsFinal]];
+//    }
+   
+}
+
+//-(void) addScore
+//{
+//    int x;
+//    NSLog(@" x = %d", x);
+//    for (x=0; x<=10; x++) {
+//        if (x==10) {
+//            playerPoints+=1;
+//            NSLog(@"PLAYER POINTS: %d", playerPoints);
+//            [self updateScore:playerPoints];
+//        }
+//        NSLog(@"x = %d",x);
+//    }
+//}
+- (void) playerJump
+{
+    NSLog(@"jump");
+	playerVelocity.y = 350.0f + fabsf(playerVelocity.x);
+    playerPoints+=5;
+    NSLog(@"PLAYER POINTS: %d", playerPoints);
+    [self updateScore:playerPoints];
+
+}
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+	float accel_filter = 0.1f;
+	playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
+}
+
+
 @end
