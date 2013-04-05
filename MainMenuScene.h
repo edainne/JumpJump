@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface MainMenuScene : NSObject
+#import "cocos2d.h"
+#import "SceneManager.h"
+@interface MainMenuScene : CCLayer
 
 @end

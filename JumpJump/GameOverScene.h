@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "SceneManager.h"
 
-@interface GameOverScene : NSObject
+@interface GameOverScene : CCLayer
+{
+    
+}
 
 @end

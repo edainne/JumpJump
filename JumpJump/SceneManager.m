@@ -9,5 +9,36 @@
 #import "SceneManager.h"
 
 @implementation SceneManager
++(void) goToMainMenuScene;
+{
+    CCLayer *layer = [MainMenuScene node];
+    [SceneManager go:layer];
+}
++(void) goToHelloWorldScene
+{
+    CCLayer *layer = [HelloWorldLayer node];
+    [SceneManager go:layer];
+}
++(void) goToGameOverScene
+{
+    CCLayer *layer = [GameOverScene node];
+    [SceneManager go:layer];
+}
 
++(void) go : (CCLayer*) layer
+{
+    CCDirector *director = [CCDirector sharedDirector];
+	CCScene *newScene = [SceneManager wrap:layer];
+	if ([director runningScene]) {
+		[director replaceScene:newScene];
+	}else {
+		[director runWithScene:newScene];
+	}
+}
++(CCScene *) wrap : (CCLayer *) layer
+{
+    CCScene *newScene = [CCScene node];
+	[newScene addChild: layer];
+	return newScene;
+}
 @end

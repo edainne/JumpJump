@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SceneManager : NSObject
+#import "MainMenuScene.h"
+#import "HelloWorldLayer.h"
+#import "GameOverScene.h"
 
+@interface SceneManager : NSObject
+{
+    
+}
+
++(void) goToMainMenuScene;
++(void) goToHelloWorldScene;
++(void) goToGameOverScene;
+
++(void) go : (CCLayer*) layer;
++(CCScene *) wrap : (CCLayer *) layer;
 @end
