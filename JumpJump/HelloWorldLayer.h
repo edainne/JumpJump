@@ -8,13 +8,13 @@
 
 
 #import <GameKit/GameKit.h>
-#import "GameOver.h"
+
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
 #define kMinPlatformStep	50
-#define kMaxPlatformStep	250
-#define kNumPlatforms		10
+#define kMaxPlatformStep	100
+#define kNumPlatforms		20
 #define kPlatformTopPadding 10
 
 @interface HelloWorldLayer : CCLayerColor <UIAccelerometerDelegate>

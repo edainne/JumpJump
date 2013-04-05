@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B057B02C170EBE33006EE241 /* Icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B057B02B170EBE33006EE241 /* Icon copy.png */; };
+		B057B02F170ECB67006EE241 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B057B02E170ECB67006EE241 /* MainMenuScene.m */; };
+		B057B032170ECB9A006EE241 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B057B031170ECB9A006EE241 /* GameOverScene.m */; };
+		B057B035170ECE4A006EE241 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B057B034170ECE49006EE241 /* SceneManager.m */; };
 		B05B7110170955C300066A37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B05B710F170955C300066A37 /* QuartzCore.framework */; };
 		B05B7112170955C300066A37 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B05B7111170955C300066A37 /* OpenGLES.framework */; };
 		B05B7114170955C300066A37 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B05B7113170955C300066A37 /* OpenAL.framework */; };
@@ -140,10 +144,16 @@
 		B05B72B4170955C800066A37 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B05B72B3170955C800066A37 /* HelloWorldLayer.m */; };
 		B05B72B7170955C800066A37 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B05B72B6170955C800066A37 /* IntroLayer.m */; };
 		B05B72BE1709567C00066A37 /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = B05B72BD1709567C00066A37 /* platform.png */; };
-		B06C1448170D836700FDD397 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = B06C1447170D836700FDD397 /* GameOver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B057B02B170EBE33006EE241 /* Icon copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon copy.png"; sourceTree = "<group>"; };
+		B057B02D170ECB67006EE241 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuScene.h; path = ../MainMenuScene.h; sourceTree = "<group>"; };
+		B057B02E170ECB67006EE241 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuScene.m; path = ../MainMenuScene.m; sourceTree = "<group>"; };
+		B057B030170ECB9A006EE241 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		B057B031170ECB9A006EE241 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		B057B033170ECE49006EE241 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		B057B034170ECE49006EE241 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		B05B710C170955C300066A37 /* JumpJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05B710F170955C300066A37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B05B7111170955C300066A37 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -424,8 +434,6 @@
 		B05B72B6170955C800066A37 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		B05B72BD1709567C00066A37 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
 		B06C128B170D6F6A00FDD397 /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
-		B06C1446170D836700FDD397 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
-		B06C1447170D836700FDD397 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,10 +494,14 @@
 			children = (
 				B05B72AF170955C800066A37 /* AppDelegate.h */,
 				B05B72B0170955C800066A37 /* AppDelegate.m */,
+				B057B033170ECE49006EE241 /* SceneManager.h */,
+				B057B034170ECE49006EE241 /* SceneManager.m */,
+				B057B02D170ECB67006EE241 /* MainMenuScene.h */,
+				B057B02E170ECB67006EE241 /* MainMenuScene.m */,
 				B05B72B2170955C800066A37 /* HelloWorldLayer.h */,
 				B05B72B3170955C800066A37 /* HelloWorldLayer.m */,
-				B06C1446170D836700FDD397 /* GameOver.h */,
-				B06C1447170D836700FDD397 /* GameOver.m */,
+				B057B030170ECB9A006EE241 /* GameOverScene.h */,
+				B057B031170ECB9A006EE241 /* GameOverScene.m */,
 				B05B72B5170955C800066A37 /* IntroLayer.h */,
 				B05B72B6170955C800066A37 /* IntroLayer.m */,
 				B05B7122170955C300066A37 /* Resources */,
@@ -504,6 +516,7 @@
 			children = (
 				B05B7123170955C300066A37 /* Default.png */,
 				B06C128B170D6F6A00FDD397 /* Arial Black.ttf */,
+				B057B02B170EBE33006EE241 /* Icon copy.png */,
 				B05B7125170955C300066A37 /* Default@2x.png */,
 				B05B7127170955C300066A37 /* Default-568h@2x.png */,
 				B05B72BD1709567C00066A37 /* platform.png */,
@@ -944,6 +957,7 @@
 				B05B7139170955C300066A37 /* iTunesArtwork in Resources */,
 				B05B728F170955C800066A37 /* ChangeLog in Resources */,
 				B05B72BE1709567C00066A37 /* platform.png in Resources */,
+				B057B02C170EBE33006EE241 /* Icon copy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,7 +1079,9 @@
 				B05B72B1170955C800066A37 /* AppDelegate.m in Sources */,
 				B05B72B4170955C800066A37 /* HelloWorldLayer.m in Sources */,
 				B05B72B7170955C800066A37 /* IntroLayer.m in Sources */,
-				B06C1448170D836700FDD397 /* GameOver.m in Sources */,
+				B057B02F170ECB67006EE241 /* MainMenuScene.m in Sources */,
+				B057B032170ECB9A006EE241 /* GameOverScene.m in Sources */,
+				B057B035170ECE4A006EE241 /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

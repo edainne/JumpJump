@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "SceneManager.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -41,7 +42,7 @@
 //    [super initWithColor:ccc4(255, 255, 255, 255)];
  
     [self createPlatforms];
-    CCSprite *player = [CCSprite spriteWithFile:@"Icon.png"];
+    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
 
     [self addChild:player z:10 tag: playerTag];
         [self schedule:@selector(step:)];
@@ -151,7 +152,7 @@
 
 -(void) resetPlayer
 {
-    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon copy.png"];
     player = (CCSprite *) [self getChildByTag:playerTag];
     playerPosition.x = 160;
     playerPosition.y = 160;
@@ -170,7 +171,7 @@
     playerPoints+=1;
     [self updateScore:playerPoints];
     
-    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon copy.png"];
     player = (CCSprite *) [self getChildByTag:playerTag];
     
     playerPosition.x += playerVelocity.x * dt;
@@ -198,17 +199,22 @@
             CGSize platformSize = platform.contentSize;
             CGPoint platformPosition = platform.position;
             
-            maximumX = platformPosition.x - platformSize.width/2 - 10;
-            minimumX = platformPosition.x + platformSize.width/2 + 10;
+            maximumX = platformPosition.x - platformSize.width/2;
+            minimumX = platformPosition.x + platformSize.width/2;
             
             float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2 - kPlatformTopPadding);
             
+
+
             if (playerPosition.x > maximumX &&
                 playerPosition.x < minimumX &&
                 playerPosition.y > platformPosition.y &&
                 playerPosition.y < minimumY) {
                 [self playerJump];
-            }
+
+                                }
+                
+
         }
     }
     else if (playerPosition.y > 240){
@@ -237,17 +243,21 @@
     player.position = playerPosition;
     
     [self updatePlayerPosition:playerPosition];
+    
 
 }
 
 -(void) updatePlayerPosition : (CGPoint) pPosition
 {
-    CCSprite  *player = [CCSprite spriteWithFile:@"Icon.png"];
+    CCSprite  *player = [CCSprite spriteWithFile:@"Icon copy.png"];
     playerPosition = pPosition;
     if (playerPosition.y + player.boundingBox.size.height/2 + 10 < 0) {
     NSLog(@"Death");
     [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPoints]];
     [self unschedule:@selector(step:)];
+        
+        [SceneManager goToGameOverScene];
+        
     }
     
 }
@@ -264,12 +274,8 @@
 {
     NSLog(@"jump");
 	playerVelocity.y = 350.0f + fabsf(playerVelocity.x);
-    playerPoints+=1;
-    NSLog(@"PLAYER POINTS: %d", playerPoints);
-    [self updateScore:playerPoints];
+    }
 
-
-}
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {
 	float accel_filter = 0.1f;
