@@ -19,6 +19,12 @@
     CCLayer *layer = [HelloWorldLayer node];
     [SceneManager go:layer];
 }
++(void) gotoPauseLayer
+{
+    CCLayer *layer = [PauseLayer node];
+    [SceneManager go:layer];
+
+}
 +(void) goToGameOverScene
 {
     CCLayer *layer = [GameOverScene node];

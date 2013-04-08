@@ -66,34 +66,17 @@
     [super dealloc];
 }
 
-- (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
-{
-    [[CCDirector sharedDirector] stopAnimation];
-    [[CCDirector sharedDirector] pause];
-    [self pauseSchedulerAndActions];
-    
-}
-//- (void)ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
+//- (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
 //{
-//    [[CCDirector sharedDirector] resume];
-//    [[CCDirector sharedDirector] startAnimation];
-//    [self resumeSchedulerAndActions];
+//
+//    [[CCDirector sharedDirector] stopAnimation];
+//    [[CCDirector sharedDirector] pause];
+//    [self pauseSchedulerAndActions];
+//    [SceneManager gotoPauseLayer];
+//    
 //}
 
-//- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    NSArray *touchArray=[touches allObjects];
-//    
-//    if ([touchArray count] == 2){
-//        [[CCDirector sharedDirector] stopAnimation];
-//        [[CCDirector sharedDirector] pause];
-//        [self pauseSchedulerAndActions];
-//    } else if([touchArray count]==1){
-//        [[CCDirector sharedDirector] resume];
-//        [[CCDirector sharedDirector] startAnimation];
-//        [self resumeSchedulerAndActions];
-//    }
-//}
+
 -(void) initializePlatform
 {
     CCSprite *platform = [CCSprite spriteWithFile:@"platform.png"];
@@ -282,7 +265,7 @@
     [scoreLabel setString:[NSString stringWithFormat:@"%d", playerPoints]];
     [self unschedule:@selector(step:)];
         
-        [SceneManager goToGameOverScene];
+        [SceneManager goToMainMenuScene];
         
     }
     

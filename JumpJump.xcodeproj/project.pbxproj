@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B00447AE17124D610063A7EF /* pause.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B00447AD17124D610063A7EF /* pause.jpg */; };
+		B00447B417124DCC0063A7EF /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00447B317124DCC0063A7EF /* PauseLayer.m */; };
 		B057B02C170EBE33006EE241 /* Icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B057B02B170EBE33006EE241 /* Icon copy.png */; };
 		B057B02F170ECB67006EE241 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B057B02E170ECB67006EE241 /* MainMenuScene.m */; };
 		B057B032170ECB9A006EE241 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B057B031170ECB9A006EE241 /* GameOverScene.m */; };
@@ -147,6 +149,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B00447AD17124D610063A7EF /* pause.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pause.jpg; sourceTree = "<group>"; };
+		B00447B217124DCC0063A7EF /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseLayer.h; path = ../PauseLayer.h; sourceTree = "<group>"; };
+		B00447B317124DCC0063A7EF /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseLayer.m; path = ../PauseLayer.m; sourceTree = "<group>"; };
 		B057B02B170EBE33006EE241 /* Icon copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon copy.png"; sourceTree = "<group>"; };
 		B057B02D170ECB67006EE241 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuScene.h; path = ../MainMenuScene.h; sourceTree = "<group>"; };
 		B057B02E170ECB67006EE241 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuScene.m; path = ../MainMenuScene.m; sourceTree = "<group>"; };
@@ -500,6 +505,8 @@
 				B057B02E170ECB67006EE241 /* MainMenuScene.m */,
 				B05B72B2170955C800066A37 /* HelloWorldLayer.h */,
 				B05B72B3170955C800066A37 /* HelloWorldLayer.m */,
+				B00447B217124DCC0063A7EF /* PauseLayer.h */,
+				B00447B317124DCC0063A7EF /* PauseLayer.m */,
 				B057B030170ECB9A006EE241 /* GameOverScene.h */,
 				B057B031170ECB9A006EE241 /* GameOverScene.m */,
 				B05B72B5170955C800066A37 /* IntroLayer.h */,
@@ -515,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				B05B7123170955C300066A37 /* Default.png */,
+				B00447AD17124D610063A7EF /* pause.jpg */,
 				B06C128B170D6F6A00FDD397 /* Arial Black.ttf */,
 				B057B02B170EBE33006EE241 /* Icon copy.png */,
 				B05B7125170955C300066A37 /* Default@2x.png */,
@@ -958,6 +966,7 @@
 				B05B728F170955C800066A37 /* ChangeLog in Resources */,
 				B05B72BE1709567C00066A37 /* platform.png in Resources */,
 				B057B02C170EBE33006EE241 /* Icon copy.png in Resources */,
+				B00447AE17124D610063A7EF /* pause.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1091,7 @@
 				B057B02F170ECB67006EE241 /* MainMenuScene.m in Sources */,
 				B057B032170ECB9A006EE241 /* GameOverScene.m in Sources */,
 				B057B035170ECE4A006EE241 /* SceneManager.m in Sources */,
+				B00447B417124DCC0063A7EF /* PauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
